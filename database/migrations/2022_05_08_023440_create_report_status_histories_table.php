@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('report_status_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('report_uuid');
+            $table->foreignid('report_id');
             $table->foreignId('admin_id');
             $table->timestamps();
             
-            $table->foreign('report_uuid')
-                ->references('uuid')
+            $table->foreign('report_id')
+                ->references('id')
                 ->on('reports')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

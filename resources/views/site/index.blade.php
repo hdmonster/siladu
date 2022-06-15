@@ -26,15 +26,9 @@
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
+  <!-- Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Reveal - v4.7.0
-  * Template URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <link href="/css/timeline.css" rel="stylesheet">
 </head>
 
 <body>
@@ -57,29 +51,7 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= hero Section ======= -->
-  <section id="hero">
-
-    <div class="hero-content" data-aos="fade-up">
-      <h2>Sistem Layanan <span>Pengaduan</span><br> Kekerasan Anak dan Perempuan</h2>
-      <div>
-        <a href="#" class="btn-get-started">Lapor Kekerasan Anak</a>
-        <a href="#" class="btn-projects">Lapor Kekerasan Perempuan</a>
-      </div>
-    </div>
-
-    <div class="hero-slider swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url('/img/hero-carousel/1.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('/img/hero-carousel/2.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('/img/hero-carousel/3.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('/img/hero-carousel/4.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('/img/hero-carousel/5.jpg');"></div>
-      </div>
-    </div>
-
-  </section><!-- End Hero Section -->
-
+  @include('site.sections.hero')
 
   <main id="main">
     @include('site.sections.about')
@@ -100,7 +72,11 @@
 
   </main><!-- End #main -->
 
+
   @include('site.partials.footer')
+  @include('site.components.form-pengaduan-modal')
+  @include('site.components.success-modal')
+  @include('site.components.track-modal')
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>
@@ -114,9 +90,24 @@
   <script src="/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="/vendor/php-email-form/validate.js"></script>
 
+  <!-- External Vendor JS -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
 
+  @stack('scripts')
+
+  <!-- Start of LiveChat (www.livechat.com) code -->
+  <script>
+    window.__lc = window.__lc || {};
+    window.__lc.license = 14171247;
+    ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+  </script>
+  <noscript><a href="https://www.livechat.com/chat-with/14171247/" rel="nofollow">Chat with us</a>, powered by <a
+      href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
+  <!-- End of LiveChat code -->
 </body>
 
 </html>

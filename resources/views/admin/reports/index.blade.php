@@ -15,8 +15,8 @@
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Nama</th>
-            <th>Umur</th>
+            <th>Nama Pelapor</th>
+            <th>No HP</th>
             <th>Jenis Pengaduan</th>
             <th>Tanggal Aduan</th>
             <th>Status</th>
@@ -26,8 +26,8 @@
         </thead>
         <tfoot>
           <tr>
-            <th>Nama</th>
-            <th>Umur</th>
+            <th>Nama Pelapor</th>
+            <th>No HP</th>
             <th>Jenis Pengaduan</th>
             <th>Tanggal Aduan</th>
             <th>Status</th>
@@ -39,8 +39,8 @@
           @foreach($reports as $report)
 
           <tr>
-            <td>{{ $report->nama }}</td>
-            <td>{{ $report->umur }}</td>
+            <td>{{ $report->nama_pelapor }}</td>
+            <td>{{ $report->no_hp }}</td>
             <td class="text-capitalize">{{ $report->jenis_laporan }}</td>
             <td>{{ $report->created_at->format('d M Y H:m') }}</td>
             <td>
@@ -61,7 +61,7 @@
               </button>
             </td>
             <td>
-              <a href="#" class="btn btn-secondary btn-icon-split btn-sm" data-id="{{ $report->uuid }}"
+              <a href="#" class="btn btn-secondary btn-icon-split btn-sm" data-id="{{ $report->id }}"
                 data-toggle="modal" data-target="#detailModal">
                 <span class="icon text-white-50">
                   <i class="fas fa-eye"></i>
@@ -73,7 +73,7 @@
               @if($report->status == 'butuh konfirmasi')
               <div class="row">
 
-                <form action="/admin/reports/{{ $report->uuid }}/update-status/confirm" method="post">
+                <form action="/admin/reports/{{ $report->id }}/update-status/confirm" method="post">
                   @method('put')
                   @csrf
                   <button class="btn btn-circle btn-sm btn-success mx-2"
@@ -82,7 +82,7 @@
                   </button>
                 </form>
 
-                <form action="/admin/reports/{{ $report->uuid }}/update-status/spam" method="post">
+                <form action="/admin/reports/{{ $report->id }}/update-status/spam" method="post">
                   @method('put')
                   @csrf
                   <button class="btn btn-circle btn-sm btn-danger"
@@ -95,7 +95,7 @@
 
               @elseif($report->status == 'sedang diproses')
 
-              <form action="/admin/reports/{{ $report->uuid }}/update-status/finish" method="post">
+              <form action="/admin/reports/{{ $report->id }}/update-status/finish" method="post">
                 @method('put')
                 @csrf
                 <button class="btn btn-sm btn-success"
@@ -108,7 +108,7 @@
 
               <div class="row">
 
-                <form action="/admin/reports/{{ $report->uuid }}/update-status/unspam" method="post">
+                <form action="/admin/reports/{{ $report->id }}/update-status/unspam" method="post">
                   @method('put')
                   @csrf
                   <button class="btn btn-circle btn-sm btn-warning mx-2"
@@ -117,7 +117,7 @@
                   </button>
                 </form>
 
-                <form action="/admin/reports/{{ $report->uuid }}" method="post">
+                <form action="/admin/reports/{{ $report->id }}" method="post">
                   @method('delete')
                   @csrf
                   <button class="btn btn-circle btn-sm btn-danger"

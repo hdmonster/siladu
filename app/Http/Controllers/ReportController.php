@@ -20,7 +20,7 @@ class ReportController extends Controller
     {
         return view('admin.reports.index', [
             'title' => 'Laporan Aduan',
-            'reports' => Report::latest()->get(),
+            'reports' => Report::latest('updated_at')->get(),
         ]);
     }
 
@@ -42,7 +42,12 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        //
+        $validatedData = $request->validate($request->rules());
+
+        Report::create($validatedData);
+
+        // return redirect()->back();
+        return $request;
     }
 
     /**
@@ -53,7 +58,9 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        return $report;
+        return Report::with('reportStatusHistories')
+                ->where(['id' => $report->id])
+                ->first();
     }
 
     /**
@@ -87,12 +94,12 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        Report::destroy($report->uuid);
+        Report::destroy($report->id);
 
         return redirect()->back();
     }
 
-    public function updateStatus($uuid, $changeStatus) {
+    public function updateStatus($id, $changeStatus) {
         if ($changeStatus == 'confirm'){
             $status = 'sedang diproses';
         } elseif ($changeStatus == 'finish') {
@@ -104,13 +111,17 @@ class ReportController extends Controller
         }
 
         // Update report status
-        Report::where('uuid', $uuid)->update(['status' => $status]);
+        Report::where('id', $id)->update(['status' => $status]);
         
         $reportStatusHistoryC = new ReportStatusHistoryController();
-        $reportStatusHistoryC->storeStatusLog($uuid, $status);
+        $reportStatusHistoryC->storeStatusLog($id, $status);
 
         return redirect()->back();
     }
 
-    
-}
+    public function showByCode($code) {
+        return Report::with('reportStatusHistories')
+                ->where(['code' => $code])
+                ->first();
+    } 
+}  

@@ -17,17 +17,17 @@
 
           <div class="form-group">
             <label for="mName">Nama</label>
-            <input type="text" class="form-control" id="mName" name="name">
+            <input type="text" class="form-control" id="mName" name="name" required>
           </div>
 
           <div class="form-group">
             <label for="mName">Username</label>
-            <input type="text" class="form-control" id="mUsername" name="username">
+            <input type="text" class="form-control" id="mUsername" name="username" required>
           </div>
 
           <div class="form-group">
             <label for="mRole">Role</label>
-            <select class="form-control" id="mRole" name="role">
+            <select class="form-control" id="mRole" name="role" required>
               <option disabled>Pilih role</option>
               <option value="superadmin">Superadmin</option>
               <option value="admin">Admin</option>
@@ -37,7 +37,7 @@
           <div class="form-group">
             <label for="mPassword">Password</label>
             <input type="password" class="form-control" id="mPassword" name="password" autocomplete="off">
-            <small id="emailHelp" class="form-text text-muted">
+            <small id="passwordHelp" class="form-text text-muted">
               Kosongkan jika tidak ingin mengganti password.
             </small>
           </div>
@@ -68,7 +68,7 @@
     xhttp.onload = function() {
       const user = JSON.parse(this.responseText)
 
-      modal.find('#userUpdateForm').attr('action', '/admin/users/' + user.id)
+      modal.find('#userUpdateForm').attr('action', '/admin/users/' + id)
 
       modal.find('.modal-body #mName').val(user.name)
       modal.find('.modal-body #mUsername').val(user.username)

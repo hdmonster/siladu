@@ -16,7 +16,8 @@
           <div class="form-group">
             <label for="gallery">Pilih gambar</label>
             <img class="img-fluid gal-preview mb-3">
-            <input type="file" id="gallery" name="gallery" onchange="previewGallery()" class="form-control-file">
+            <input type="file" id="gallery" name="gallery" onchange="previewGallery()" class="form-control-file"
+              required>
 
             @if($errors->any())
 
@@ -32,15 +33,15 @@
 
           <div class="form-group">
             <label for="imgDesc">Deskripsi Gambar</label>
-            <textarea class="form-control" name="description" id="imgDesc" rows="3"></textarea>
+            <textarea class="form-control" name="description" id="imgDesc" rows="3" required></textarea>
           </div>
 
           <div class="form-group">
             <label for="tag">Tag</label>
-            <select class="form-control" id="tag" name="tag">
+            <select class="form-control" id="tag" name="tag" required>
               <option selected disabled>Pilih tag</option>
               <option value="sosialisasi">Sosialisasi</option>
-              <option value="bantuan sosial">Bantuan Sosial</option>
+              <option value="bansos">Bantuan Sosial</option>
               <option value="masyarakat">Masyarakat</option>
             </select>
           </div>

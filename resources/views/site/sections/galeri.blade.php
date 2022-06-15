@@ -22,68 +22,20 @@
 
     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-      <div class="col-lg-4 col-md-6 portfolio-item filter-sosialisasi">
-        <img src="/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+      @foreach ($galleries as $gallery)
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-{{ $gallery->tag }}">
+        <img src="{{ asset('storage/' . $gallery->url) }}" class="img-fluid" alt="gallery">
         <div class="portfolio-info">
-          <p>Sosialisasi</p>
-          <a href="/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title="apapapa">
+          <p class="text-capitalize">{{ $gallery->tag }}</p>
+          <a href="{{ asset('storage/' . $gallery->url) }}" data-gallery="portfolioGallery"
+            class="portfolio-lightbox preview-link" title="{{ $gallery->description }}">
             <i class="bx bx-plus"></i>
           </a>
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-6 portfolio-item filter-masyarakat">
-        <img src="/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-          <p>Masyarakat</p>
-          <a href="/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title=""><i class="bx bx-plus"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 portfolio-item filter-sosialisasi">
-        <img src="/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-          <p>Sosialiasi</p>
-          <a href="/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title=""><i class="bx bx-plus"></i></a>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 portfolio-item filter-bansos">
-        <img src="/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-          <p>Bantuan Sosial</p>
-          <a href="/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title=""><i class="bx bx-plus">
-
-            </i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 portfolio-item filter-masyarakat">
-        <img src="/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-          <p>Masyarakat</p>
-          <a href="/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title="">
-            <i class="bx bx-plus"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 portfolio-item filter-sosialisasi">
-        <img src="/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-        <div class="portfolio-info">
-          <p>Sosialisasi</p>
-          <a href="/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery"
-            class="portfolio-lightbox preview-link" title="">
-            <i class="bx bx-plus"></i>
-          </a>
-        </div>
-      </div>
+      @endforeach
 
     </div>
 

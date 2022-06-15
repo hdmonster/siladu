@@ -13,17 +13,17 @@
 
           <div class="form-group">
             <label for="addName">Nama</label>
-            <input type="text" class="form-control" id="addName" name="name">
+            <input type="text" class="form-control" id="addName" name="name" required>
           </div>
 
           <div class="form-group">
             <label for="addUsername">Username</label>
-            <input type="text" class="form-control" id="addUsername" name="username">
+            <input type="text" class="form-control" id="addUsername" name="username" required>
           </div>
 
           <div class="form-group">
             <label for="addRole">Role</label>
-            <select class="form-control" id="addRole" name="role">
+            <select class="form-control" id="addRole" name="role" required>
               <option selected disabled>Pilih role</option>
               <option value="superadmin">Superadmin</option>
               <option value="admin">Admin</option>
@@ -32,7 +32,7 @@
 
           <div class="form-group">
             <label for="mPassword">Password</label>
-            <input type="password" class="form-control" id="mPassword" name="password" />
+            <input type="password" class="form-control" id="mPassword" name="password" required />
           </div>
 
         </div>

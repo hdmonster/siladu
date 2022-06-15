@@ -17,10 +17,11 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => $this->faker->lexify('re-????-????'),
+            'code' => rand(1000000, 9999999),
+            'nama_pelapor' => $this->faker->name(),
+            'no_hp' => $this->faker->phoneNumber(),
             'nama' => $this->faker->name(),
             'umur' => $this->faker->numberBetween(12,30),
-            'no_hp' => $this->faker->phoneNumber(),
             'alamat' => $this->faker->sentence(mt_rand(3,5)),
             'nama_ortu' => $this->faker->name(),
             'kronologis' => $this->faker->paragraph(mt_rand(10,24)),

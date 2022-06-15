@@ -11,6 +11,9 @@
 
   <title>Login - SILADU</title>
 
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link
@@ -45,18 +48,37 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">SILADU</h1>
                   </div>
-                  <form class="user" method="POST" action="{{ route('login') }}">
+                  <form class="user needs-validation" method="POST" action="/login">
                     @csrf
+
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user @error('username') is-invalid @enderror"
-                        id="exampleInputUsername" placeholder="Enter Username..." name="username"
-                        value="{{ old('username') }}">
+                        id="username" placeholder="Enter Username..." name="username" value="{{ old('username') }}">
+
+                      @error('username')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                      @enderror
                     </div>
+
                     <div class="form-group">
                       <input type="password"
-                        class="form-control form-control-user @error('password') is-invalid @enderror"
-                        id="exampleInputPassword" placeholder="Password" name="password">
+                        class="form-control form-control-user @error('password') is-invalid @enderror" id="password"
+                        placeholder="Password" name="password">
+                      @error('password')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                      @enderror
                     </div>
+
+                    @if(session()->has('authError'))
+                    <div class="text-danger mb-4">
+                      {{ session('authError') }}
+                    </div>
+                    @endif
+
                     <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                   </form>
                   <hr>
@@ -74,7 +96,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap-admin/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>

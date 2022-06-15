@@ -28,13 +28,25 @@
 
             <div class="container-fluid mt-2 p-0" id="pelapor_detail">
               <div class="d-flex flex-column mb-4">
+                <small class="font-weight-bold">Nama Korban</small>
+                <span id="nama_korban"></span>
+              </div>
+
+              <div class="d-flex flex-column mb-4">
+                <small class="font-weight-bold">Umur</small>
+                <span id="umur"></span>
+              </div>
+
+              <div class="d-flex flex-column mb-4">
                 <small class="font-weight-bold">Nama Ortu</small>
                 <span id="nama_ortu"></span>
               </div>
+
               <div class="d-flex flex-column mb-4">
                 <small class="font-weight-bold">Alamat</small>
                 <span id="alamat"></span>
               </div>
+
               <div class="d-flex flex-column">
                 <small class="font-weight-bold">Kronologi Kejadian</small>
                 <span id="kronologis"></span>
@@ -48,73 +60,8 @@
 
               <div class="row example-basic mt-2">
                 <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-
                   <ul class="timeline">
-
-                    {{-- <li class="timeline-item period">
-                      <div class="timeline-info"></div>
-                      <div class="timeline-marker"></div>
-                      <div class="timeline-content">
-                        <h5 class="timeline-title">History Status Laporan</h5>
-                      </div>
-                    </li> --}}
-                    <li class="timeline-item">
-                      <div class="timeline-info">
-                        <span>April 28, 2016</span>
-                      </div>
-                      <div class="timeline-marker"></div>
-                      <div class="timeline-content">
-                        <h5 class="timeline-title">Laporan dikirim</h5>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quia odit similique officiis
-                          architecto, eum eligendi quibusdam ad nisi reprehenderit.
-                        </p>
-                      </div>
-                    </li>
-
-                    <li class="timeline-item">
-                      <div class="timeline-info">
-                        <span>May 02, 2022</span>
-                      </div>
-                      <div class="timeline-marker"></div>
-                      <div class="timeline-content">
-                        <h5 class="timeline-title">Laporan dikonfirmasi</h5>
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, accusamus?
-                        </p>
-                      </div>
-                    </li>
-
-                    <li class="timeline-item">
-                      <div class="timeline-info">
-                        <span>May 03, 2022</span>
-                      </div>
-                      <div class="timeline-marker"></div>
-                      <div class="timeline-content">
-                        <h5 class="timeline-title">Kasus dalam penanganan</h5>
-                        <p>
-                          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat blanditiis eveniet
-                          doloremque?
-                        </p>
-                      </div>
-                    </li>
-
-                    <li class="timeline-item">
-                      <div class="timeline-info">
-                        <span>May 23, 2022</span>
-                      </div>
-                      <div class="timeline-marker"></div>
-                      <div class="timeline-content">
-                        <h5 class="timeline-title">Kasus Ditutup</h5>
-                        <p>
-                          Nullam vel sem. Nullam vel sem. Integer ante arcu, accumsan a, consectetuer eget, posuere ut,
-                          mauris.
-                        </p>
-                      </div>
-                    </li>
-
                   </ul>
-
                 </div>
               </div>
 
@@ -134,19 +81,48 @@
 
 @push('scripts')
 <script>
-  $('#detailModal').on('show.bs.modal', function (event) {
-    let button = $(event.relatedTarget)
+  const timelineItem = (title, datetime) => {
+    let parsedDatetime = new Date(datetime).toLocaleString();
+
+    if (title == 'sedang diproses') {
+      title = 'Laporan telah dikonfirmasi'
+    } else if (title == 'selesai') {
+      title = 'Kasus ditutup'
+    } else if (title == 'spam') {
+      title = 'Laporan dianggap tidak valid'
+    } else if (title == 'butuh konfirmasi') {
+      title = 'Laporan dianggap valid dan menunggu dikonfirmasi'
+    }
+
+    return `<li class="timeline-item">
+              <div class="timeline-info">
+                <span>${parsedDatetime}</span>
+              </div>
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h6 class="timeline-title">${title}</h6>
+              </div>
+            </li>`
+  }  
+</script>
+<script>
+  $('#detailModal').on('show.bs.modal', function (e) {
+    let button = $(e.relatedTarget)
     let id = button.data('id')
     let modal = $(this)
+
+    const timelineContainer = document.querySelector('ul.timeline')
     
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       const report = JSON.parse(this.responseText)
 
-      modal.find('.modal-header #nama').text(`Dilaporkan oleh ${report.nama} (${report.umur} th)`)
+      modal.find('.modal-header #nama').text(`Dilaporkan oleh ${report.nama_pelapor}`)
       modal.find('.modal-header #pelapor_info #no_hp').text(report.no_hp)
-      modal.find('.modal-body #pelapor_detail #alamat').text(report.alamat)
+      modal.find('.modal-body #pelapor_detail #nama_korban').text(report.nama)
+      modal.find('.modal-body #pelapor_detail #umur').text(report.umur)
       modal.find('.modal-body #pelapor_detail #nama_ortu').text(report.nama_ortu)
+      modal.find('.modal-body #pelapor_detail #alamat').text(report.alamat)
       modal.find('.modal-body #pelapor_detail #kronologis').text(report.kronologis)
       
       let jenisLaporan = modal.find('.modal-header #pelapor_info #jenis_laporan')
@@ -159,10 +135,33 @@
         jenisLaporan.removeClass('btn-danger') 
         jenisLaporan.addClass('btn-warning')
       }
-         
+
+      let reportStatusHistories = report.report_status_histories
+
+      let timelineItems = `
+        <li class="timeline-item">
+          <div class="timeline-info">
+            <span>${new Date(report.created_at).toLocaleString()}</span>
+          </div>
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h6 class="timeline-title">Laporan dikirim</h6>
+          </div>
+        </li>`
+
+      reportStatusHistories.forEach(history => {
+        timelineItems += timelineItem(history.status, history.created_at)
+      })
+
+      timelineContainer.innerHTML = timelineItems
     }
     xhttp.open('GET', '/admin/reports/' + id)
     xhttp.send()
+  })
+
+  $('#detailModal').on('hidden.bs.modal', function (e) {
+    const timelineContainer = document.querySelector('ul.timeline')
+    timelineContainer.innerHTML = ''
   })
 </script>
 @endpush

@@ -8,7 +8,7 @@
       Designed by BootstrapMade.
       Developed by
       <a href="https://www.instagram.com/haydardzaky_" target="_blank">
-        Jeki
+        Jaki
       </a>
       from SI20 ITK
     </div>

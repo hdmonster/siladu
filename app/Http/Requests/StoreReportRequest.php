@@ -24,9 +24,11 @@ class StoreReportRequest extends FormRequest
     public function rules()
     {
         return [
+            'code' => 'required',
+            'nama_pelapor' => 'required',
+            'no_hp' => 'required',
             'nama' => 'required',
             'umur' => 'required',
-            'no_hp' => 'required',
             'alamat' => 'required',
             'nama_ortu' => 'required',
             'kronologis' => 'required',

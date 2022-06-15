@@ -12,11 +12,10 @@ class Report extends Model
 
     public $incrementing = false;
     
-    protected $primaryKey = 'uuid';
-    protected $guarded = ['uuid'];
+    protected $guarded = ['id'];
 
     public function reportStatusHistories(){
-        return $this->hasMany(ReportHistory::class);
+        return $this->hasMany(ReportStatusHistory::class);
     }
     
 }

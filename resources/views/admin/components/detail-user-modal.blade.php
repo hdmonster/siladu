@@ -13,17 +13,17 @@
 
         <div class="form-group">
           <label for="mName">Nama</label>
-          <input type="text" class="form-control" id="detailName" name="name">
+          <input type="text" class="form-control" id="detailName" name="name" disabled>
         </div>
 
         <div class="form-group">
           <label for="mName">Username</label>
-          <input type="text" class="form-control" id="detailUsername" name="username">
+          <input type="text" class="form-control" id="detailUsername" name="username" disabled>
         </div>
 
         <div class="form-group">
           <label for="mRole">Role</label>
-          <select class="form-control" id="detailRole">
+          <select class="form-control" id="detailRole" disabled>
             <option disabled>Pilih role</option>
             <option value="superadmin">Superadmin</option>
             <option value="admin">Admin</option>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Report;
+use App\Models\Gallery;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -19,24 +21,34 @@ use App\Http\Controllers\GalleryController;
 */
 
 Route::get('/', function () {
-    return view('site.index');
+    return view('site.index', [
+        'galleries' => Gallery::all()
+    ]);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/admin', function () {
+        $total_inbox = Report::all()->count();
+        $total_need_confirm = Report::where('status', 'butuh konfirmasi')->get()->count();
+
+        return view('admin.dashboard.index', [
+            'total_inbox' => $total_inbox,
+            'total_need_confirm' => $total_need_confirm
+        ]);
+    });
+
+    Route::resource('/admin/reports', ReportController::class);
+    Route::put('/admin/reports/{reports:id}/update-status/{status}', [ReportController::class, 'updateStatus']);
+
+    Route::resource('/admin/galleries', GalleryController::class);
+
+    Route::resource('/admin/users', UserController::class);
+    Route::put('/admin/users/{users:id}/update-status/{status}', [UserController::class, 'updateStatus']);
 
 
-Route::get('/admin', function () {
-    return view('admin.dashboard.index');
 });
-
-Route::resource('/admin/reports', ReportController::class);
-Route::put('admin/reports/{reports:uuid}/update-status/{status}', [ReportController::class, 'updateStatus']);
-
-Route::resource('/admin/galleries', GalleryController::class);
-
-Route::resource('/admin/users', UserController::class);
-Route::put('/admin/users/{users:id}/update-status/{status}', [UserController::class, 'updateStatus']);
-// Route::middleware(['auth'])->group(function () {
-
-
-// });

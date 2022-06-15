@@ -47,6 +47,8 @@ class UserController extends Controller
             'role' => 'required'
         ]);
 
+        $validatedData['password'] = bcrypt($request->password);
+
         User::create($validatedData);
 
         return redirect()->back();
@@ -83,17 +85,27 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:users',
-            'role' => 'required'
-        ]);
-
-        if ($request->password != null) {
-            $validatedData['password'] = $request->password;
+        
+        if ($request->username == $user->username) {
+            $rules = [
+                'name' => 'required',
+                'role' => 'required'
+            ];
+        } else {
+            $rules = [
+                'name' => 'required',
+                'username' => 'required|unique:users',
+                'role' => 'required'
+            ];
         }
-
-        User::where('id', $user->id)->update($validatedData);
+        
+        $validatedData = $request->validate($rules);
+        
+        if ($request->password != null) {
+            $validatedData['password'] = bcrypt($request->password);
+        } 
+        
+        $user->update($validatedData);
 
         return redirect()->back();
     }
@@ -106,7 +118,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->back();
     }
 
     public function updateStatus($id, $status) 

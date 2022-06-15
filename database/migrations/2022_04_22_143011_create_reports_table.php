@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->string('uuid')->primary();
+            $table->id();
+            $table->string('code')->unique();
+            $table->string('nama_pelapor');
+            $table->string('no_hp');
             $table->string('nama');
             $table->string('umur');
-            $table->string('no_hp');
             $table->string('alamat');
             $table->string('nama_ortu');
             $table->text('kronologis');

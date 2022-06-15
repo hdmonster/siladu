@@ -58,7 +58,7 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-        //
+        return $gallery;
     }
 
     /**
@@ -81,7 +81,15 @@ class GalleryController extends Controller
      */
     public function update(UpdateGalleryRequest $request, Gallery $gallery)
     {
-        //
+        $validatedData = $request->validate($request->rules());
+
+        if ($request->file('gallery') != null){
+            $validatedData['url'] = $request->file('gallery')->store('galleries');
+        }
+
+        Gallery::find($gallery->id)->update($validatedData);
+
+        return redirect()->back();
     }
 
     /**

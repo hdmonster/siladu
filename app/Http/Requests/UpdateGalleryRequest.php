@@ -13,7 +13,7 @@ class UpdateGalleryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateGalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'gallery' => 'image|file|max:5120',
+            'tag' => 'required',
+            'description' => 'required'
         ];
     }
 }

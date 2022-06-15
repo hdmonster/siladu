@@ -4,9 +4,7 @@
     <div class="section-header">
       <h2>Hubungi Kami</h2>
       <p>
-        Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam enim
-        export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum velit export
-        irure minim illum fore
+        Punya pertanyaan atau komentar lebih lanjut? Hubungi kami melalui salah satu media dibawah.
       </p>
     </div>
 
@@ -15,24 +13,30 @@
       <div class="col-md-4">
         <div class="contact-address">
           <i class="bi bi-geo-alt"></i>
-          <h3>Address</h3>
-          <address>A108 Adam Street, NY 535022, USA</address>
+          <h3>alamat</h3>
+          <address>
+            PQP6+6H4, Penajam, Penajam North Paser Regency, East Kalimantan 76142
+          </address>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="contact-phone">
           <i class="bi bi-phone"></i>
-          <h3>Phone Number</h3>
-          <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+          <h3>no hp</h3>
+          <p><a href="tel:+6283153463858">+62 831 5346 3858</a></p>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="contact-email">
           <i class="bi bi-envelope"></i>
-          <h3>Email</h3>
-          <p><a href="mailto:info@example.com">info@example.com</a></p>
+          <h3>email</h3>
+          <p>
+            <a href="mailto:contact@siladu.herokuapp.com">
+              contact@siladu.herokuapp.com
+            </a>
+          </p>
         </div>
       </div>
 
@@ -41,8 +45,9 @@
 
   <div class="container mb-4">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452"
-      width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13416.820597743646!2d116.76096470990846!3d-1.2656844496978428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df1391d4a2c4185%3A0x5c53131c647ea999!2sDinas%20Pemberdayaan%20Perempuan%2C%20Perlindungan%20Anak%2C%20Pengendalian%20Penduduk%20dan%20KB%20PPU!5e0!3m2!1sen!2sid!4v1655040289473!5m2!1sen!2sid"
+      width="100%" height="380" frameborder="0" style="border:0" allowfullscreen>
+    </iframe>
   </div>
 
   {{-- <div class="container">

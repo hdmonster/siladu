@@ -10,7 +10,8 @@
         <h2>Kenalan dengan SILADU</h2>
         <h3>
           SILADU merupakan sistem layanan pengaduan yang dikembangkan oleh Mahasiswa Sistem Informasi 2020 ITK
-          dikhususkan untuk Dinas.... agar masyarakat dapat dengan mudah melakukan pengaduan mengenai kekerasan pada
+          dikhususkan untuk Dinas Pemberdayaan Perempuan Perlindungan Anak dan Pengendalian Penduduk dan Keluarga
+          Berencana agar masyarakat dapat dengan mudah melakukan pengaduan mengenai kekerasan pada
           anak dan perempuan.
         </h3>
 
@@ -21,13 +22,11 @@
           </li>
           <li>
             <i class="bi bi-check-circle"></i>
-            Duis aute irure dolor in reprehenderit in voluptate velit.
+            Track status laporan
           </li>
           <li>
             <i class="bi bi-check-circle"></i>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla
-            pariatur.
+            Data 100% aman
           </li>
         </ul>
 

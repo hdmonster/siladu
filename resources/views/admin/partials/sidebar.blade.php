@@ -61,6 +61,8 @@
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
+  @if(auth()->user()->role == 'superadmin')
+
   <!-- Heading -->
   <div class="sidebar-heading">
     Akun
@@ -90,6 +92,8 @@
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
+  @endif
+
   <!-- Sidebar Toggler (Sidebar) -->
   <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -102,3 +106,4 @@
 @include('admin.components.add-user-modal')
 
 @include('admin.components.upload-galeri-modal')
+@include('admin.components.update-galeri-modal')

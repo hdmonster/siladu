@@ -84,17 +84,16 @@ class ReportStatusHistoryController extends Controller
         //
     }
 
-    public function storeStatusLog($uuid, $status) {
-        $existingStatus = ReportStatusHistory::where(['report_uuid' => $uuid, 'status' => $status]);
+    public function storeStatusLog($id, $status) {
+        $existingStatus = ReportStatusHistory::where(['report_id' => $id, 'status' => $status]);
 
         if ($existingStatus->exists()) {
             $existingStatusId = $existingStatus->first()->id;
             $existingStatus->where('id', $existingStatusId)->update(['status' => $status]);
         } else {
             ReportStatusHistory::create([
-                'report_uuid' => $uuid,
-                // 'admin_id' => auth()->user()->id,
-                'admin_id' => 4,
+                'report_id' => $id,
+                'admin_id' => auth()->user()->id,
                 'status' => $status
             ]);
         }
